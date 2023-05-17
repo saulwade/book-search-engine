@@ -35,4 +35,22 @@ const typeDefs = gql`
   }
 `;
 
+const resolvers = {
+    Query: {
+      users: async () => {
+        // assuming you have a User model and you're using mongoose
+        return await User.find({});
+      },
+    },
+    Mutation: {
+      addUser: async (_, args) => {
+        // again assuming User is your model
+        const user = new User(args);
+        await user.save();
+        return user;
+      },
+    },
+  };
+  
+
 module.exports = typeDefs;
